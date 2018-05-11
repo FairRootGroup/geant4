@@ -32,11 +32,16 @@ find_package(PythonLibs REQUIRED)
 find_package(Boost)
 # Boost 1.67 and later: Boost Python components require
 # a Python version suffix, e.g. python36 or python27 for the versions built against Python 3.6 and 2.7,
+
 if(Boost_VERSION VERSION_LESS 106700)
-find_package(Boost COMPONENTS python27)
+  set (boost_python_libname  "boost_python")
+else()
+  set (boost_python_libname  "boost_python27")
 endif()
 find_package(XercesC)
 find_package(ROOT)
+
+
 
 if(NOT GEANT4_FOUND)
   message(FATAL_ERROR "NOT Found Geant4.")
@@ -46,6 +51,7 @@ endif()
 # parameters for building
 message(STATUS "--------------------------------------------------------")
 message(STATUS "Parameters for building")
+message(STATUS "Boost_python Library:  ${boost_python_libname}")
 
 # build options
 if(NOT CMAKE_BUILD_TYPE)
