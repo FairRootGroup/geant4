@@ -30,6 +30,11 @@ find_package(Geant4 REQUIRED)
 find_package(PythonInterp REQUIRED)
 find_package(PythonLibs REQUIRED)
 find_package(Boost)
+# Boost 1.67 and later: Boost Python components require
+# a Python version suffix, e.g. python36 or python27 for the versions built against Python 3.6 and 2.7,
+if(Boost_VERSION VERSION_LESS 106700)
+find_package(Boost COMPONENTS python27)
+endif()
 find_package(XercesC)
 find_package(ROOT)
 
